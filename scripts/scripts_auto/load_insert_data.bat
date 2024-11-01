@@ -3,11 +3,11 @@ chcp 65001
 setlocal
 
 :: Configura las variables de conexión
-set "PGHOST=localhost"
+set "PGHOST=*******"
 set "PGPORT=5432"
-set "PGUSER=adminzoo"
-set "PGPASSWORD=Zoo2024**"
-set "PGDATABASE=zoologico"
+set "PGUSER=*******"
+set "PGPASSWORD=*********"
+set "PGDATABASE=*******"
 
 :: Ejecuta cada archivo SQL en orden
 echo Ejecutando 01_separate_tables.sql...

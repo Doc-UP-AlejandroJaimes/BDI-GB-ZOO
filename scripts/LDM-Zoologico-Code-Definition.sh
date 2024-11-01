@@ -46,6 +46,7 @@ Table CUIDADOR {
   ID SERIAL [pk]
   Nombre VARCHAR [not null]
   FechaContratacion DATE [not null]
+  Salario NUMBER [not null]
   IDEspecialidad SERIAL [ref: > ESPECIALIDAD.ID]
 }
 
