@@ -83,6 +83,7 @@ CREATE TABLE animals.HABITAT (
   ID SERIAL PRIMARY KEY,         -- Identificador único del hábitat
   Nombre VARCHAR(50) NOT NULL,   -- Nombre del hábitat (obligatorio)
   IDUbicacion SERIAL,            -- Identificador de la ubicación (clave foránea)
+  CostoBase NUMERIC(10, 2) NOT NULL, -- Tarifa base del habitat COP.
   IDClima SERIAL                 -- Identificador del tipo de clima (clave foránea)
 );
 
@@ -102,13 +103,21 @@ CREATE TABLE animals.CLIMA (
   Nombre VARCHAR(50) NOT NULL    -- Nombre del tipo de clima (obligatorio)
 );
 
+-- Tabla TIPO_VISITANTES
+-- Define los tipos de visitantes y sus descuentos asociados
+CREATE TABLE animals.TIPO_VISITANTES (
+    ID SERIAL PRIMARY KEY, -- Identificador único para cada tipo de visitante
+    Nombre VARCHAR(50) NOT NULL, -- Nombre del tipo de visitante (e.g., Adulto, Menor de edad)
+    Descuento NUMERIC(5, 2) NOT NULL CHECK (Descuento BETWEEN 0 AND 100) -- Porcentaje de descuento aplicable a este tipo de visitante
+);
+
 -- Tabla VISITANTES:
 -- Almacena los datos de los visitantes, permitiendo registrar sus visitas al zoológico.
 
 CREATE TABLE animals.VISITANTES (
   ID SERIAL PRIMARY KEY,         -- Identificador único del visitante
   Nombre VARCHAR(50) NOT NULL,   -- Nombre del visitante (obligatorio)
-  FechaVisita DATE               -- Fecha de la visita al zoológico
+  IDTipoVisitante SERIAL
 );
 
 -- Tabla HABITAT_VISITANTES:
@@ -117,7 +126,9 @@ CREATE TABLE animals.VISITANTES (
 CREATE TABLE animals.HABITAT_VISITANTES (
   ID SERIAL PRIMARY KEY,         -- Identificador único de la visita
   IDHabitat SERIAL,              -- Identificador del hábitat visitado (clave foránea)
-  IDVisitantes SERIAL            -- Identificador del visitante (clave foránea)
+  IDVisitantes SERIAL,            -- Identificador del visitante (clave foránea)
+  CostoFinal NUMERIC(10, 2) NOT NULL, -- Costo final, obtenido con la funcion calcular costo.
+  FechaVisita DATE               -- Fecha de la visita al zoológico
 );
 
 -- #################################################
@@ -139,6 +150,9 @@ ALTER TABLE animals.ESPECIE ADD FOREIGN KEY (IDEstadoConservacion) REFERENCES an
 -- Relaciones de la tabla HABITAT
 ALTER TABLE animals.HABITAT ADD FOREIGN KEY (IDUbicacion) REFERENCES animals.UBICACION (ID);
 ALTER TABLE animals.HABITAT ADD FOREIGN KEY (IDClima) REFERENCES animals.CLIMA (ID);
+
+-- Relaciones de la tabla TIPO_VISITANTES
+ALTER TABLE animals.VISITANTES ADD FOREIGN KEY (IDTipoVisitante) REFERENCES animals.TIPO_VISITANTES (ID);
 
 -- Relaciones de la tabla intermedia HABITAT_VISITANTES
 ALTER TABLE animals.HABITAT_VISITANTES ADD FOREIGN KEY (IDHabitat) REFERENCES animals.HABITAT (ID);
