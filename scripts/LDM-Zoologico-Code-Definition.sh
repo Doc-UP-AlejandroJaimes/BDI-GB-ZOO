@@ -14,8 +14,8 @@ Tablas Principales:
   - ANIMALES: Almacena información específica de cada animal, incluyendo su cuidador, hábitat y especie.
   - CUIDADOR: Registra los datos de los cuidadores, así como su especialidad en el cuidado de animales.
   - ESPECIE: Define las especies animales, con información sobre su familia taxonómica y estado de conservación.
-  - HABITAT: Describe los hábitats del zoológico, junto con su ubicación y tipo de clima.
-  - VISITANTES: Registra la información de los visitantes al zoológico, incluyendo la fecha de visita.
+  - HABITAT: Describe los hábitats del zoológico, junto con su ubicación, tipo de clima y costo base.
+  - VISITANTES: Registra la información de los visitantes al zoológico y su tipo.
 
 Tablas de Referencia:
   - ESPECIALIDAD: Enumera las especialidades de los cuidadores.
@@ -23,9 +23,10 @@ Tablas de Referencia:
   - ESTADO_CONSERVACION: Describe los posibles estados de conservación de las especies.
   - UBICACION: Define las diferentes ubicaciones físicas del zoológico.
   - CLIMA: Enumera los tipos de clima asociados a los hábitats.
+  - TIPO_VISITANTES: Define los tipos de visitantes y los descuentos asociados.
 
 Tabla Intermedia:
-  - HABITAT_VISITANTES: Relaciona los hábitats y visitantes, permitiendo rastrear los hábitats visitados.
+  - HABITAT_VISITANTES: Relaciona los hábitats y visitantes, permitiendo rastrear los hábitats visitados y el costo final calculado.
 
 Este diseño facilita el seguimiento detallado y preciso de las operaciones en el zoológico, 
 permitiendo, por ejemplo, asociar animales con sus respectivos cuidadores, hábitats y especies, 
@@ -36,7 +37,7 @@ la consistencia en el sistema.
 Table ANIMALES {
   ID SERIAL [pk]
   Nombre VARCHAR [not null]
-  FechaNacim DATE [null]
+  FechaNac DATE [null]
   IDCuidador SERIAL [ref: > CUIDADOR.ID]
   IDHabitat SERIAL [ref: > HABITAT.ID]
   IDEspecie SERIAL [ref: > ESPECIE.ID]
@@ -46,7 +47,7 @@ Table CUIDADOR {
   ID SERIAL [pk]
   Nombre VARCHAR [not null]
   FechaContratacion DATE [not null]
-  Salario NUMBER [not null]
+  Salario NUMERIC [not null]
   IDEspecialidad SERIAL [ref: > ESPECIALIDAD.ID]
 }
 
@@ -70,7 +71,7 @@ Table FAMILIA {
 
 Table ESTADO_CONSERVACION {
   ID SERIAL [pk]
-  Codigp VARCHAR [not null]
+  Codigo VARCHAR(2) [not null]
   Nombre VARCHAR [not null]
   Descripcion VARCHAR [not null]
 }
@@ -78,6 +79,7 @@ Table ESTADO_CONSERVACION {
 Table HABITAT {
   ID SERIAL [pk]
   Nombre VARCHAR [not null]
+  CostoBase NUMERIC [not null]
   IDUbicacion SERIAL [ref: > UBICACION.ID]
   IDClima SERIAL [ref: > CLIMA.ID]
 }
@@ -92,10 +94,17 @@ Table CLIMA {
   Nombre VARCHAR [not null]
 }
 
+Table TIPO_VISITANTES {
+  ID SERIAL [pk]
+  Nombre VARCHAR [not null]
+  Descuento NUMERIC(5, 2) [not null] //CHECK (Descuento BETWEEN 0 AND 100)
+}
+
+
 Table VISITANTES {
   ID SERIAL [pk]
   Nombre VARCHAR [not null]
-  FechaVisita DATE [null]
+  IdTipoVisitantes  SERIAL [ref: > TIPO_VISITANTES.ID]
 }
 
 // Tabla intermedia
@@ -103,4 +112,7 @@ Table HABITAT_VISITANTES {
   ID SERIAL [pk]
   IDHabitat SERIAL [ref: > HABITAT.ID]
   IDVisitantes SERIAL [ref: > VISITANTES.ID]
+  FechaVisita DATE [null] //DEFAULT CURRENT_DATE
+  CostoFinal NUMERIC [not null]
+
 }
