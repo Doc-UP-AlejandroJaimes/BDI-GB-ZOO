@@ -1,0 +1,1 @@
+pg_dump -U adminzoo -h localhost -p 5432 -F c -b -v -f '\bk_zoo_06112024.sql' zoologico
