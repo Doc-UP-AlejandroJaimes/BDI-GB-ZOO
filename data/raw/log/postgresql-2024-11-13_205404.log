@@ -1,0 +1,190 @@
+2024-11-13 20:54:04.783 -05 [6004] LOG:  el sistema de bases de datos fue apagado en 2024-11-13 20:53:37 -05
+2024-11-13 20:59:04.760 -05 [5984] LOG:  empezando checkpoint: time
+2024-11-13 20:59:04.801 -05 [5984] LOG:  checkpoint completo: escritos 3 búfers (0.0%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=0.011 s, sync=0.005 s, total=0.067 s; archivos sincronizados=2, más largo=0.003 s, promedio=0.003 s; distancia=0 kB, estimación=0 kB; lsn=0/4F4E610, lsn de redo=0/4F4E5B8
+2024-11-13 21:10:42.718 -05 [13180] ERROR:  no existe la relaciÃ³n Â«avionÂ» en carÃ¡cter 13
+2024-11-13 21:10:42.718 -05 [13180] SENTENCIA:  INSERT INTO AVION (Modelo,Capacidad,IDAerolinea) VALUES
+	(
+	'Boeing 737 MAX',
+	200,
+	3
+	);
+	COMMIT;
+2024-11-13 21:10:57.461 -05 [13180] WARNING:  no hay una transacciÃ³n en curso
+2024-11-13 21:14:04.813 -05 [5984] LOG:  empezando checkpoint: time
+2024-11-13 21:14:05.399 -05 [5984] LOG:  checkpoint completo: escritos 6 búfers (0.0%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=0.538 s, sync=0.029 s, total=0.586 s; archivos sincronizados=6, más largo=0.018 s, promedio=0.005 s; distancia=11 kB, estimación=11 kB; lsn=0/4F51340, lsn de redo=0/4F512E8
+2024-11-13 21:24:04.418 -05 [5984] LOG:  empezando checkpoint: time
+2024-11-13 21:24:05.794 -05 [5984] LOG:  checkpoint completo: escritos 13 búfers (0.1%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=1.325 s, sync=0.037 s, total=1.377 s; archivos sincronizados=12, más largo=0.018 s, promedio=0.004 s; distancia=33 kB, estimación=33 kB; lsn=0/4F59A70, lsn de redo=0/4F59A18
+2024-11-13 21:29:04.808 -05 [5984] LOG:  empezando checkpoint: time
+2024-11-13 21:29:05.058 -05 [5984] LOG:  checkpoint completo: escritos 3 búfers (0.0%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=0.205 s, sync=0.013 s, total=0.250 s; archivos sincronizados=3, más largo=0.009 s, promedio=0.005 s; distancia=5 kB, estimación=30 kB; lsn=0/4F5B008, lsn de redo=0/4F5AF78
+2024-11-13 21:34:04.068 -05 [5984] LOG:  empezando checkpoint: time
+2024-11-13 21:34:05.217 -05 [5984] LOG:  checkpoint completo: escritos 11 búfers (0.1%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=1.091 s, sync=0.027 s, total=1.149 s; archivos sincronizados=6, más largo=0.017 s, promedio=0.005 s; distancia=57 kB, estimación=57 kB; lsn=0/4F69570, lsn de redo=0/4F69518
+2024-11-13 21:44:04.237 -05 [5984] LOG:  empezando checkpoint: time
+2024-11-13 21:44:05.519 -05 [5984] LOG:  checkpoint completo: escritos 12 búfers (0.1%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=1.226 s, sync=0.028 s, total=1.283 s; archivos sincronizados=7, más largo=0.018 s, promedio=0.004 s; distancia=59 kB, estimación=59 kB; lsn=0/4F782C0, lsn de redo=0/4F78268
+2024-11-13 21:44:12.834 -05 [13180] WARNING:  no hay una transacciÃ³n en curso
+2024-11-13 21:46:37.109 -05 [13180] ERROR:  update o delete en Â«paisÂ» viola la llave forÃ¡nea Â«vuelo_codpaisorigen_fkeyÂ» en la tabla Â«vueloÂ»
+2024-11-13 21:46:37.109 -05 [13180] DETALLE:  La llave (codpais)=(BRA) todavÃ­a es referida desde la tabla Â«vueloÂ».
+2024-11-13 21:46:37.109 -05 [13180] SENTENCIA:  DELETE FROM PAIS WHERE CodPais = 'BRA';
+2024-11-13 21:48:01.211 -05 [13180] ERROR:  update o delete en Â«vueloÂ» viola la llave forÃ¡nea Â«ticket_idvuelo_fkeyÂ» en la tabla Â«ticketÂ»
+2024-11-13 21:48:01.211 -05 [13180] DETALLE:  La llave (id)=(106) todavÃ­a es referida desde la tabla Â«ticketÂ».
+2024-11-13 21:48:01.211 -05 [13180] SENTENCIA:  DELETE FROM VUELO WHERE CodPaisOrigen = 'BRA' OR CodPaisDestino = 'BRA';
+2024-11-13 21:49:04.524 -05 [5984] LOG:  empezando checkpoint: time
+2024-11-13 21:49:08.211 -05 [5984] LOG:  checkpoint completo: escritos 34 búfers (0.2%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=3.637 s, sync=0.029 s, total=3.687 s; archivos sincronizados=8, más largo=0.016 s, promedio=0.004 s; distancia=243 kB, estimación=243 kB; lsn=0/4FB5220, lsn de redo=0/4FB51C8
+2024-11-13 21:49:14.008 -05 [13180] ERROR:  la subconsulta debe retornar sÃ³lo una columna en carÃ¡cter 37
+2024-11-13 21:49:14.008 -05 [13180] SENTENCIA:  DELETE FROM TICKET 
+	WHERE IdVuelo = (SELECT FROM VUELO WHERE CodPaisOrigen = 'BRA' OR CodPaisDestino = 'BRA');
+2024-11-13 21:49:31.092 -05 [13180] ERROR:  la subconsulta tiene muy pocas columnas en carÃ¡cter 35
+2024-11-13 21:49:31.092 -05 [13180] SENTENCIA:  DELETE FROM TICKET 
+	WHERE IdVuelo IN (SELECT FROM VUELO WHERE CodPaisOrigen = 'BRA' OR CodPaisDestino = 'BRA');
+2024-11-13 21:50:20.069 -05 [13180] ERROR:  una subconsulta utilizada como expresiÃ³n retornÃ³ mÃ¡s de un registro
+2024-11-13 21:50:20.069 -05 [13180] SENTENCIA:  DELETE FROM TICKET 
+	WHERE IdVuelo = (SELECT ID FROM VUELO WHERE CodPaisOrigen = 'BRA' OR CodPaisDestino = 'BRA');
+2024-11-13 22:00:12.778 -05 [13180] ERROR:  error de sintaxis en o cerca de Â«BEGINÂ» en carÃ¡cter 189
+2024-11-13 22:00:12.778 -05 [13180] CONTEXTO:  el nombre de tipo Â«NUMERIC
+	    BEGIN
+	    SELECT PrecioTicket
+	    INTO currency
+	    FROM TICKET
+	    WHERE IdPasajero Â» no es vÃ¡lido
+2024-11-13 22:00:12.778 -05 [13180] SENTENCIA:  CREATE OR REPLACE FUNCTION test_ticket_currency_by_nationality
+	(
+	    nacionalidad VARCHAR,
+	    pasajeroID INT
+	)
+	RETURNS NUMERIC
+	LANGUAGE plpgsql
+	AS
+	$$
+	    DECLARE
+	    currency NUMERIC
+	    BEGIN
+	    SELECT PrecioTicket
+	    INTO currency
+	    FROM TICKET
+	    WHERE IdPasajero = pasajeroID;
+	
+	    RETURN currency
+	    END;
+	
+	$$;
+2024-11-13 22:04:04.228 -05 [5984] LOG:  empezando checkpoint: time
+2024-11-13 22:04:07.920 -05 [5984] LOG:  checkpoint completo: escritos 34 búfers (0.2%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=3.637 s, sync=0.030 s, total=3.692 s; archivos sincronizados=11, más largo=0.016 s, promedio=0.003 s; distancia=38 kB, estimación=223 kB; lsn=0/4FBEB60, lsn de redo=0/4FBEB08
+2024-11-13 22:09:04.921 -05 [5984] LOG:  empezando checkpoint: time
+2024-11-13 22:09:05.953 -05 [5984] LOG:  checkpoint completo: escritos 10 búfers (0.1%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=0.986 s, sync=0.015 s, total=1.032 s; archivos sincronizados=9, más largo=0.004 s, promedio=0.002 s; distancia=38 kB, estimación=204 kB; lsn=0/4FC8758, lsn de redo=0/4FC8700
+2024-11-13 23:10:59.210 -05 [16472] LOG:  no se pudo recibir datos del cliente: An existing connection was forcibly closed by the remote host.
+	
+2024-11-13 23:10:59.218 -05 [13180] LOG:  no se pudo recibir datos del cliente: An existing connection was forcibly closed by the remote host.
+	
+2024-11-13 23:10:59.226 -05 [5832] LOG:  no se pudo recibir datos del cliente: An existing connection was forcibly closed by the remote host.
+	
+2024-11-13 23:10:59.227 -05 [3632] LOG:  no se pudo recibir datos del cliente: An existing connection was forcibly closed by the remote host.
+	
+2024-11-14 10:54:29.859 -05 [14608] ERROR:  no existe la relaciÃ³n Â«ticketÂ» en carÃ¡cter 122
+2024-11-14 10:54:29.859 -05 [14608] SENTENCIA:  SELECT IDVUELO, 
+			IDPASAJERO,
+			PRECIOTICKET,
+			test_ticket_currency_by_nationality('Z',IDPASAJERO)  AS COP_TICKET
+	FROM TICKET
+	WHERE IDPASAJERO IN (526,675,908,916);
+2024-11-14 11:06:13.201 -05 [14608] ERROR:  una subconsulta utilizada como expresiÃ³n retornÃ³ mÃ¡s de un registro
+2024-11-14 11:06:13.201 -05 [14608] CONTEXTO:  sentencia SQL: Â«UPDATE TICKET
+	        SET PrecioTicket = PrecioTicket * cop_currency
+	        WHERE IdPasajero = 
+	        (SELECT P.ID
+	        FROM PASAJERO P
+	        INNER JOIN NACIONALIDAD NAC ON P.IDNacionalidad = NAC.ID
+	        WHERE lower(NAC.Nombre) = lower(nacionalidad_q))Â»
+	funciÃ³n PL/pgSQL update_ticket_currency_by_nationality(character varying) en la lÃ­nea 5 en sentencia SQL
+2024-11-14 11:06:13.201 -05 [14608] SENTENCIA:  SELECT update_ticket_currency_by_nationality('colombiano');
+2024-11-14 11:06:15.177 -05 [5984] LOG:  empezando checkpoint: time
+2024-11-14 11:06:16.211 -05 [5984] LOG:  checkpoint completo: escritos 10 búfers (0.1%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=0.996 s, sync=0.015 s, total=1.035 s; archivos sincronizados=10, más largo=0.003 s, promedio=0.002 s; distancia=37 kB, estimación=188 kB; lsn=0/4FD1CE0, lsn de redo=0/4FD1C88
+2024-11-14 11:11:15.226 -05 [5984] LOG:  empezando checkpoint: time
+2024-11-14 11:11:17.598 -05 [5984] LOG:  checkpoint completo: escritos 22 búfers (0.1%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=2.325 s, sync=0.030 s, total=2.373 s; archivos sincronizados=12, más largo=0.017 s, promedio=0.003 s; distancia=111 kB, estimación=180 kB; lsn=0/4FEDC40, lsn de redo=0/4FEDBB0
+2024-11-14 11:26:15.608 -05 [5984] LOG:  empezando checkpoint: time
+2024-11-14 11:26:16.172 -05 [5984] LOG:  checkpoint completo: escritos 6 búfers (0.0%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=0.520 s, sync=0.014 s, total=0.565 s; archivos sincronizados=3, más largo=0.011 s, promedio=0.005 s; distancia=33 kB, estimación=165 kB; lsn=0/4FF6170, lsn de redo=0/4FF60E0
+2024-11-14 11:33:30.188 -05 [14608] ERROR:  no existe la columna Â«nacionalidad_qÂ» en carÃ¡cter 238
+2024-11-14 11:33:30.188 -05 [14608] CONSULTA:  SELECT IdVuelo
+	                               FROM TICKET
+	        WHERE IdPasajero IN 
+	        (SELECT P.ID
+	        FROM PASAJERO P
+	        INNER JOIN NACIONALIDAD NAC ON P.IDNacionalidad = NAC.ID
+	        WHERE lower(NAC.Nombre) = lower(nacionalidad_q))
+2024-11-14 11:33:30.188 -05 [14608] CONTEXTO:  funciÃ³n PL/pgSQL get_vuelos_id_from_by_nationality(character varying) en la lÃ­nea 5 en sentencia SQL
+2024-11-14 11:33:30.188 -05 [14608] SENTENCIA:  SELECT get_vuelos_id_from_by_nationality('colombiano');
+2024-11-14 11:33:50.931 -05 [14608] ERROR:  no se puede cambiar el nombre del parÃ¡metro de entrada Â«nacioalidad_qÂ»
+2024-11-14 11:33:50.931 -05 [14608] HINT:  Use DROP FUNCTION get_vuelos_id_from_by_nationality(character varying) primero.
+2024-11-14 11:33:50.931 -05 [14608] SENTENCIA:  CREATE OR REPLACE FUNCTION get_vuelos_id_from_by_nationality(
+	    nacionalidad_q VARCHAR
+	)
+	RETURNS VARCHAR
+	LANGUAGE plpgsql
+	AS
+	$$
+	    DECLARE
+	        id_vuelos VARCHAR;
+	    BEGIN
+	        SELECT IdVuelo
+	        INTO id_vuelos
+	        FROM TICKET
+	        WHERE IdPasajero IN 
+	        (SELECT P.ID
+	        FROM PASAJERO P
+	        INNER JOIN NACIONALIDAD NAC ON P.IDNacionalidad = NAC.ID
+	        WHERE lower(NAC.Nombre) = lower(nacionalidad_q));
+	    RETURN id_vuelos;
+	    END;
+	$$;
+2024-11-14 11:34:08.014 -05 [14608] ERROR:  no se puede cambiar el nombre del parÃ¡metro de entrada Â«nacioalidad_qÂ»
+2024-11-14 11:34:08.014 -05 [14608] HINT:  Use DROP FUNCTION get_vuelos_id_from_by_nationality(character varying) primero.
+2024-11-14 11:34:08.014 -05 [14608] SENTENCIA:  CREATE OR REPLACE FUNCTION get_vuelos_id_from_by_nationality(
+	    nacionalidad_q VARCHAR
+	)
+	RETURNS VARCHAR
+	LANGUAGE plpgsql
+	AS
+	$$
+	    DECLARE
+	        id_vuelos VARCHAR;
+	    BEGIN
+	        SELECT IdVuelo
+	        INTO id_vuelos
+	        FROM TICKET
+	        WHERE IdPasajero IN 
+	        (SELECT P.ID
+	        FROM PASAJERO P
+	        INNER JOIN NACIONALIDAD NAC ON P.IDNacionalidad = NAC.ID
+	        WHERE lower(NAC.Nombre) = lower(nacionalidad_q));
+	    RETURN id_vuelos;
+	    END;
+	$$;
+	
+2024-11-14 11:36:15.188 -05 [5984] LOG:  empezando checkpoint: time
+2024-11-14 11:36:16.337 -05 [5984] LOG:  checkpoint completo: escritos 11 búfers (0.1%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=1.116 s, sync=0.013 s, total=1.150 s; archivos sincronizados=10, más largo=0.002 s, promedio=0.002 s; distancia=39 kB, estimación=153 kB; lsn=0/4FFFE80, lsn de redo=0/4FFFE28
+2024-11-14 11:41:15.350 -05 [5984] LOG:  empezando checkpoint: time
+2024-11-14 11:41:15.609 -05 [5984] LOG:  checkpoint completo: escritos 3 búfers (0.0%); 0 archivos WAL añadidos, 0 eliminados, 1 reciclados; write=0.198 s, sync=0.021 s, total=0.259 s; archivos sincronizados=3, más largo=0.017 s, promedio=0.007 s; distancia=14 kB, estimación=139 kB; lsn=0/5003940, lsn de redo=0/50038E8
+2024-11-14 11:55:08.103 -05 [14608] ERROR:  error de sintaxis en o cerca de Â«WHEREÂ» en carÃ¡cter 15
+2024-11-14 11:55:08.103 -05 [14608] SENTENCIA:  SELECT * FROM WHERE Nombre LIKE 'Col%';
+2024-11-14 11:55:52.302 -05 [14608] ERROR:  no existe la columna po.codpaisorigen en carÃ¡cter 264
+2024-11-14 11:55:52.302 -05 [14608] HINT:  Probablemente quiera hacer referencia a la columna Â«vu.codpaisorigenÂ».
+2024-11-14 11:55:52.302 -05 [14608] SENTENCIA:  SELECT T.*
+	FROM TICKET T
+	INNER JOIN VUELO VU ON T.IdVuelo = VU.ID
+	INNER JOIN PAIS PO ON VU.CodPaisOrigen = PO.CodPais
+	INNER JOIN PASAJERO PJ ON T.IdPasajero = PJ.ID
+	INNER JOIN NACIONALIDAD NA ON PJ.IDNacionalidad = NA.ID
+	WHERE lower(NA.Nombre) = 'colombiano' AND PO.CodPaisOrigen = 'COG';
+2024-11-14 11:57:00.652 -05 [14608] ERROR:  error de sintaxis en o cerca de Â«-Â» en carÃ¡cter 260
+2024-11-14 11:57:00.652 -05 [14608] SENTENCIA:  SELECT T.*
+	FROM TICKET T
+	INNER JOIN VUELO VU ON T.IdVuelo = VU.ID
+	INNER JOIN PAIS PO ON VU.CodPaisOrigen = PO.CodPais
+	INNER JOIN PASAJERO PJ ON T.IdPasajero = PJ.ID
+	INNER JOIN NACIONALIDAD NA ON PJ.IDNacionalidad = NA.ID
+	WHERE lower(NA.Nombre) = 'colombiano';-
+2024-11-14 12:02:36.220 -05 [14608] ERROR:  falta una entrada para la tabla Â«naÂ» en la clÃ¡usula FROM en carÃ¡cter 178
+2024-11-14 12:02:36.220 -05 [14608] SENTENCIA:  SELECT T.*
+	FROM TICKET T
+	INNER JOIN VUELO VU ON T.IdVuelo = VU.ID
+	INNER JOIN PAIS PO ON VU.CodPaisOrigen = PO.CodPais
+	INNER JOIN PASAJERO PJ ON T.IdPasajero = PJ.ID
+	WHERE lower(NA.Nombre) = 'colombiano';

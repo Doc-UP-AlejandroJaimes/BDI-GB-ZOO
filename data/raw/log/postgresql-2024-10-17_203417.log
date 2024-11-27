@@ -1,0 +1,15 @@
+2024-10-17 20:34:17.613 -05 [6444] LOG:  el sistema de bases de datos fue apagado en 2024-10-17 20:33:46 -05
+2024-10-17 20:39:17.526 -05 [6412] LOG:  empezando checkpoint: time
+2024-10-17 20:39:17.543 -05 [6412] LOG:  checkpoint completo: escritos 3 búfers (0.0%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=0.004 s, sync=0.003 s, total=0.020 s; archivos sincronizados=2, más largo=0.002 s, promedio=0.002 s; distancia=0 kB, estimación=0 kB; lsn=0/15B26F0, lsn de redo=0/15B2698
+2024-10-18 08:16:48.469 -05 [8268] ERROR:  error de sintaxis en o cerca de Â«"alfaromeo24**"Â» en carÃ¡cter 34
+2024-10-18 08:16:48.469 -05 [8268] SENTENCIA:  CREATE USER alejo WITH PASSWORD  "alfaromeo24**"
+	CREATE ROLE alejo2
+	CREATEA DATABASE cursos_online OWNER alejo
+	CREATE DATABASE cursos_online OWNER alejo
+	COMMIT;
+2024-10-18 08:17:23.765 -05 [8268] ERROR:  error de sintaxis en o cerca de Â«"alejo123*"Â» en carÃ¡cter 33
+2024-10-18 08:17:23.765 -05 [8268] SENTENCIA:  CREATE USER alejo WITH PASSWORD "alejo123*";
+2024-10-18 08:17:44.418 -05 [6412] LOG:  empezando checkpoint: time
+2024-10-18 08:17:44.794 -05 [6412] LOG:  checkpoint completo: escritos 4 búfers (0.0%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=0.335 s, sync=0.007 s, total=0.376 s; archivos sincronizados=4, más largo=0.003 s, promedio=0.002 s; distancia=3 kB, estimación=3 kB; lsn=0/15B36D0, lsn de redo=0/15B3678
+2024-10-18 08:22:44.807 -05 [6412] LOG:  empezando checkpoint: time
+2024-10-18 08:24:32.876 -05 [6412] LOG:  checkpoint completo: escritos 980 búfers (6.0%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=106.987 s, sync=1.066 s, total=108.069 s; archivos sincronizados=306, más largo=0.769 s, promedio=0.004 s; distancia=4547 kB, estimación=4547 kB; lsn=0/1A24498, lsn de redo=0/1A24408

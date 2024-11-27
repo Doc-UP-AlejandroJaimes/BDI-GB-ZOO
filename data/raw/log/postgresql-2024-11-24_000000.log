@@ -1,0 +1,364 @@
+2024-11-26 17:09:59.555 -05 [5956] LOG:  empezando checkpoint: time
+2024-11-26 17:10:00.789 -05 [5956] LOG:  checkpoint completo: escritos 12 b�fers (0.1%); 0 archivos WAL a�adidos, 0 eliminados, 0 reciclados; write=1.210 s, sync=0.009 s, total=1.251 s; archivos sincronizados=6, m�s largo=0.002 s, promedio=0.002 s; distancia=36 kB, estimaci�n=1398 kB; lsn=0/5ABEED0, lsn de redo=0/5ABEE78
+2024-11-26 17:10:18.584 -05 [11396] ERROR:  no existe la columna «habitat_id»
+2024-11-26 17:10:18.584 -05 [11396] SENTENCIA:  CREATE INDEX idx_habitat_visitantes_habitat_id ON habitat_visitantes (habitat_id);
+2024-11-26 17:11:03.516 -05 [11396] ERROR:  la relación «idx_habitat_visitantes_habitat_id» ya existe
+2024-11-26 17:11:03.516 -05 [11396] SENTENCIA:  CREATE INDEX idx_habitat_visitantes_habitat_id ON habitat_visitantes (id);
+2024-11-26 17:14:59.804 -05 [5956] LOG:  empezando checkpoint: time
+2024-11-26 17:15:02.425 -05 [5956] LOG:  checkpoint completo: escritos 23 b�fers (0.1%); 0 archivos WAL a�adidos, 0 eliminados, 0 reciclados; write=2.428 s, sync=0.134 s, total=2.622 s; archivos sincronizados=20, m�s largo=0.113 s, promedio=0.007 s; distancia=138 kB, estimaci�n=1272 kB; lsn=0/5AE1AE0, lsn de redo=0/5AE1A50
+2024-11-26 17:23:48.056 -05 [11396] ERROR:  no existe la relación «animal» en carácter 15
+2024-11-26 17:23:48.056 -05 [11396] SENTENCIA:  SELECT * FROM ANIMAL;
+2024-11-26 17:27:53.107 -05 [11396] ERROR:  no existe la columna sub1.idcuiddor en carácter 242
+2024-11-26 17:27:53.107 -05 [11396] HINT:  Probablemente quiera hacer referencia a la columna «sub1.idcuidador».
+2024-11-26 17:27:53.107 -05 [11396] SENTENCIA:  SELECT cu.Nombre AS CUIDADOR,
+		   count(an.id) AS ANIMALES_A_CARGO
+	FROM CUIDADOR cu
+	INNER JOIN ANIMALES an ON cu.id = an.idcuidador
+	GROUP BY cu.nombre
+	HAVING COUNT(an.id) > (SELECT MAX(sub1.id) from animales sub1 INNER JOIN cuidador sub2 ON sub1.idcuiddor=sub2.id);
+2024-11-26 17:29:37.677 -05 [11396] ERROR:  una subconsulta utilizada como expresión retornó más de un registro
+2024-11-26 17:29:37.677 -05 [11396] SENTENCIA:  SELECT cu.Nombre AS CUIDADOR,
+		   count(an.id) AS ANIMALES_A_CARGO
+	FROM CUIDADOR cu
+	INNER JOIN ANIMALES an ON cu.id = an.idcuidador
+	GROUP BY cu.nombre
+	HAVING COUNT(an.id) = (SELECT MAX(sub1.id) from animales sub1 INNER JOIN cuidador sub2 ON sub1.idcuidador=sub2.id group by sub1.id);
+2024-11-26 18:11:18.349 -05 [11396] ERROR:  la columna «hm.habitat» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación en carácter 652
+2024-11-26 18:11:18.349 -05 [11396] SENTENCIA:  WITH FilterPeriodVisits AS (
+		SELECT fp.idhabitat,
+		       fp.costofinal,
+			   EXTRACT(YEAR FROM fp.fechavisita) as anio
+		FROM habitat_visitantes fp
+		WHERE fp.fechavisita >= CURRENT_DATE - INTERVAL '5 years'
+	),
+	MostVisitedHabitat AS (
+		SELECT fp.idhabitat,
+		       fp.anio,
+			   COUNT(*) AS total_visitas,
+			   SUM(fp.costofinal) AS total_recaudado
+	    FROM FilterPeriodVisits fp
+		GROUP BY fp.idhabitat, fp.anio
+	),
+	HabitatMapping AS (
+		SELECT h.Nombre AS HABITAT,
+			   h.costobase AS COSTO_BASE_HABITAT,
+			   mv.anio,
+			   mv.total_visitas,
+			   mv.total_recaudado
+		FROM habitat h
+		INNER JOIN MostVisitedHabitat mv ON h.id = mv.idhabitat
+	)
+	
+	SELECT 
+			hm.habitat,
+			hm.costo_base_habitat,
+			hm.anio,
+			MAX(hm.total_visitas),
+			hm.total_recaudado
+	FROM HabitatMapping hm;
+2024-11-26 18:11:59.138 -05 [11396] ERROR:  la columna «hm.costo_base_habitat» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación en carácter 666
+2024-11-26 18:11:59.138 -05 [11396] SENTENCIA:  WITH FilterPeriodVisits AS (
+		SELECT fp.idhabitat,
+		       fp.costofinal,
+			   EXTRACT(YEAR FROM fp.fechavisita) as anio
+		FROM habitat_visitantes fp
+		WHERE fp.fechavisita >= CURRENT_DATE - INTERVAL '5 years'
+	),
+	MostVisitedHabitat AS (
+		SELECT fp.idhabitat,
+		       fp.anio,
+			   COUNT(*) AS total_visitas,
+			   SUM(fp.costofinal) AS total_recaudado
+	    FROM FilterPeriodVisits fp
+		GROUP BY fp.idhabitat, fp.anio
+	),
+	HabitatMapping AS (
+		SELECT h.Nombre AS HABITAT,
+			   h.costobase AS COSTO_BASE_HABITAT,
+			   mv.anio,
+			   mv.total_visitas,
+			   mv.total_recaudado
+		FROM habitat h
+		INNER JOIN MostVisitedHabitat mv ON h.id = mv.idhabitat
+	)
+	
+	SELECT 
+			hm.habitat,
+			hm.costo_base_habitat,
+			hm.anio,
+			MAX(hm.total_visitas),
+			hm.total_recaudado
+	FROM HabitatMapping hm
+	GROUP BY hm.habitat;
+2024-11-26 18:12:59.786 -05 [11396] ERROR:  la columna «h.nombre» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación en carácter 444
+2024-11-26 18:12:59.786 -05 [11396] SENTENCIA:  WITH FilterPeriodVisits AS (
+		SELECT fp.idhabitat,
+		       fp.costofinal,
+			   EXTRACT(YEAR FROM fp.fechavisita) as anio
+		FROM habitat_visitantes fp
+		WHERE fp.fechavisita >= CURRENT_DATE - INTERVAL '5 years'
+	),
+	MostVisitedHabitat AS (
+		SELECT fp.idhabitat,
+		       fp.anio,
+			   COUNT(*) AS total_visitas,
+			   SUM(fp.costofinal) AS total_recaudado
+	    FROM FilterPeriodVisits fp
+		GROUP BY fp.idhabitat, fp.anio
+	),
+	HabitatMapping AS (
+		SELECT h.Nombre AS HABITAT,
+			   h.costobase AS COSTO_BASE_HABITAT,
+			   mv.anio,
+			   MAX(mv.total_visitas),
+			   mv.total_recaudado
+		FROM habitat h
+		INNER JOIN MostVisitedHabitat mv ON h.id = mv.idhabitat
+	)
+	SELECT * FROM HabitatMapping;
+2024-11-26 18:17:00.490 -05 [11396] ERROR:  error de sintaxis en o cerca de «.» en carácter 695
+2024-11-26 18:17:00.490 -05 [11396] SENTENCIA:  WITH FilterPeriodVisits AS (
+		SELECT fp.idhabitat,
+		       fp.costofinal,
+			   EXTRACT(YEAR FROM fp.fechavisita) as anio
+		FROM habitat_visitantes fp
+		WHERE fp.fechavisita >= CURRENT_DATE - INTERVAL '5 years'
+	),
+	MostVisitedHabitat AS (
+		SELECT fp.idhabitat,
+		       fp.anio,
+			   COUNT(*) AS total_visitas,
+			   SUM(fp.costofinal) AS total_recaudado
+	    FROM FilterPeriodVisits fp
+		GROUP BY fp.idhabitat, fp.anio
+	),
+	HabitatMapping AS (
+		SELECT h.Nombre AS HABITAT,
+			   h.costobase AS COSTO_BASE_HABITAT,
+			   mv.anio,
+			   mv.total_visitas,
+			   mv.total_recaudado
+		FROM habitat h
+		INNER JOIN MostVisitedHabitat mv ON h.id = mv.idhabitat
+	)
+	SELECT  hm.habitat,
+			hm.anio,
+			hm.total_visitas
+			hm.total_recaudado
+	FROM HabitatMapping
+	ORDER BY hm.anio DESC, hm.total_visitas DESC;
+2024-11-26 18:17:19.741 -05 [11396] ERROR:  falta una entrada para la tabla «hm» en la cláusula FROM en carácter 649
+2024-11-26 18:17:19.741 -05 [11396] SENTENCIA:  WITH FilterPeriodVisits AS (
+		SELECT fp.idhabitat,
+		       fp.costofinal,
+			   EXTRACT(YEAR FROM fp.fechavisita) as anio
+		FROM habitat_visitantes fp
+		WHERE fp.fechavisita >= CURRENT_DATE - INTERVAL '5 years'
+	),
+	MostVisitedHabitat AS (
+		SELECT fp.idhabitat,
+		       fp.anio,
+			   COUNT(*) AS total_visitas,
+			   SUM(fp.costofinal) AS total_recaudado
+	    FROM FilterPeriodVisits fp
+		GROUP BY fp.idhabitat, fp.anio
+	),
+	HabitatMapping AS (
+		SELECT h.Nombre AS HABITAT,
+			   h.costobase AS COSTO_BASE_HABITAT,
+			   mv.anio,
+			   mv.total_visitas,
+			   mv.total_recaudado
+		FROM habitat h
+		INNER JOIN MostVisitedHabitat mv ON h.id = mv.idhabitat
+	)
+	SELECT  hm.habitat,
+			hm.anio,
+			hm.total_visitas,
+			hm.total_recaudado
+	FROM HabitatMapping
+	ORDER BY hm.anio DESC, hm.total_visitas DESC;
+2024-11-26 18:29:22.818 -05 [11396] ERROR:  la columna «cte.idhabitat» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación en carácter 492
+2024-11-26 18:29:22.818 -05 [11396] SENTENCIA:  WITH FilterPeriodVisits AS (
+		SELECT fp.idhabitat,
+		       fp.costofinal,
+			   EXTRACT(YEAR FROM fp.fechavisita) as anio
+		FROM habitat_visitantes fp
+		WHERE fp.fechavisita >= CURRENT_DATE - INTERVAL '5 years'
+	),
+	CountVisitedHabitat AS (
+		SELECT fp.idhabitat,
+		       fp.anio,
+			   COUNT(*) AS total_visitas,
+			   SUM(fp.costofinal) AS total_recaudado
+	    FROM FilterPeriodVisits fp
+		GROUP BY fp.idhabitat, fp.anio
+		ORDER BY fp.anio DESC, total_visitas DESC
+	),
+	MostVisitedHabitat AS (
+		SELECT CTE.idhabitat,
+			   CTE.anio,
+			   MAX(CTE.total_visitas),
+			   CTE.total_recaudado
+		FROM (	SELECT 
+					cv.idhabitat,
+		       		cv.anio,
+			   		cv.total_visitas,
+			   		cv.total_recaudado
+	    		FROM 
+					CountVisitedHabitat cv 
+			  ) AS CTE
+		--ORDER BY cv.anio DESC, cv.total_visitas DESC
+		--GROUP BY cv.idhabitat, cv.anio, cv.total_visitas, cv.total_recaudado
+	)
+	
+	SELECT * FROM MostVisitedHabitat;
+2024-11-26 18:30:36.788 -05 [11396] ERROR:  error de sintaxis en o cerca de «FROM» en carácter 584
+2024-11-26 18:30:36.788 -05 [11396] SENTENCIA:  WITH FilterPeriodVisits AS (
+		SELECT fp.idhabitat,
+		       fp.costofinal,
+			   EXTRACT(YEAR FROM fp.fechavisita) as anio
+		FROM habitat_visitantes fp
+		WHERE fp.fechavisita >= CURRENT_DATE - INTERVAL '5 years'
+	),
+	CountVisitedHabitat AS (
+		SELECT fp.idhabitat,
+		       fp.anio,
+			   COUNT(*) AS total_visitas,
+			   SUM(fp.costofinal) AS total_recaudado
+	    FROM FilterPeriodVisits fp
+		GROUP BY fp.idhabitat, fp.anio
+		ORDER BY fp.anio DESC, total_visitas DESC
+	),
+	MostVisitedHabitat AS (
+		SELECT CTE.idhabitat,
+			   MAX(CTE.anio),
+			   MAX(CTE.total_visitas),
+			   --CTE.total_recaudado
+		FROM (	SELECT 
+					cv.idhabitat,
+		       		cv.anio,
+			   		cv.total_visitas,
+			   		cv.total_recaudado
+	    		FROM 
+					CountVisitedHabitat cv 
+			  ) AS CTE
+		GROUP BY  CTE.idhabitat
+		--ORDER BY cv.anio DESC, cv.total_visitas DESC
+		--GROUP BY cv.idhabitat, cv.anio, cv.total_visitas, cv.total_recaudado
+	)
+	
+	SELECT * FROM MostVisitedHabitat;
+2024-11-26 18:31:26.774 -05 [11396] ERROR:  error de sintaxis al final de la entrada en carácter 818
+2024-11-26 18:31:26.774 -05 [11396] SENTENCIA:  -- CTE3: Seleccionar el habitat mas visitado por cada año -> MostVisitedHabitat
+	-- CTE4: Obtner los nombres de los hábitats y sus datos agrupados por año -> HabitatMapping
+	WITH FilterPeriodVisits AS (
+		SELECT fp.idhabitat,
+		       fp.costofinal,
+			   EXTRACT(YEAR FROM fp.fechavisita) as anio
+		FROM habitat_visitantes fp
+		WHERE fp.fechavisita >= CURRENT_DATE - INTERVAL '5 years'
+	),
+	CountVisitedHabitat AS (
+		SELECT fp.idhabitat,
+		       fp.anio,
+			   COUNT(*) AS total_visitas,
+			   SUM(fp.costofinal) AS total_recaudado
+	    FROM FilterPeriodVisits fp
+		GROUP BY fp.idhabitat, fp.anio
+		ORDER BY fp.anio DESC, total_visitas DESC
+	),
+	MostVisitedHabitat AS (
+		SELECT CTE.idhabitat,
+			   CTE.anio,
+			   MAX(CTE.total_visitas)
+			   --CTE.total_recaudado
+		FROM (	SELECT 
+					cv.idhabitat,
+		       		cv.anio,
+			   		cv.total_
+2024-11-26 18:31:35.691 -05 [11396] ERROR:  la columna «cte.anio» debe aparecer en la cláusula GROUP BY o ser usada en una función de agregación en carácter 604
+2024-11-26 18:31:35.691 -05 [11396] SENTENCIA:  -- CTE4: Obtner los nombres de los hábitats y sus datos agrupados por año -> HabitatMapping
+	WITH FilterPeriodVisits AS (
+		SELECT fp.idhabitat,
+		       fp.costofinal,
+			   EXTRACT(YEAR FROM fp.fechavisita) as anio
+		FROM habitat_visitantes fp
+		WHERE fp.fechavisita >= CURRENT_DATE - INTERVAL '5 years'
+	),
+	CountVisitedHabitat AS (
+		SELECT fp.idhabitat,
+		       fp.anio,
+			   COUNT(*) AS total_visitas,
+			   SUM(fp.costofinal) AS total_recaudado
+	    FROM FilterPeriodVisits fp
+		GROUP BY fp.idhabitat, fp.anio
+		ORDER BY fp.anio DESC, total_visitas DESC
+	),
+	MostVisitedHabitat AS (
+		SELECT CTE.idhabitat,
+			   CTE.anio,
+			   MAX(CTE.total_visitas)
+			   --CTE.total_recaudado
+		FROM (	SELECT 
+					cv.idhabitat,
+		       		cv.anio,
+			   		cv.total_visitas,
+			   		cv.total_recaudado
+	    		FROM 
+					CountVisitedHabitat cv 
+			  ) AS CTE
+		GROUP BY  CTE.idhabitat
+		--ORDER BY cv.anio DESC, cv.total_visitas DESC
+		--GROUP BY cv.idhabitat, cv.anio, cv.total_visitas, cv.total_recaudado
+	)
+	
+	SELECT * FROM MostVisitedHabitat;
+2024-11-26 19:35:18.561 -05 [4156] ERROR:  no existe la relación «animales» en carácter 15
+2024-11-26 19:35:18.561 -05 [4156] SENTENCIA:  select * from animales;
+2024-11-26 19:38:07.173 -05 [4156] ERROR:  error de sintaxis en o cerca de «FechaCambio» en carácter 226
+2024-11-26 19:38:07.173 -05 [4156] SENTENCIA:  CREATE TABLE animals.AUDITORIA_ANIMALES (
+	    ID SERIAL PRIMARY KEY,
+	    IDAnimal INT,
+	    NombreAnterior VARCHAR(50),
+	    NombreNuevo VARCHAR(50),
+		FechaNacAnterior DATE,
+		FechaNacNueva DATE,
+		ActualizadoPor VARCHAR(50)
+	    FechaCambio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);
+2024-11-26 19:39:59.669 -05 [5956] LOG:  empezando checkpoint: time
+2024-11-26 19:40:05.103 -05 [5956] LOG:  checkpoint completo: escritos 50 b�fers (0.3%); 0 archivos WAL a�adidos, 0 eliminados, 0 reciclados; write=5.361 s, sync=0.047 s, total=5.435 s; archivos sincronizados=36, m�s largo=0.016 s, promedio=0.002 s; distancia=220 kB, estimaci�n=1167 kB; lsn=0/5B18B48, lsn de redo=0/5B18AF0
+2024-11-26 20:08:39.668 -05 [4156] ERROR:  no existe la columna «Nerón» en carácter 30
+2024-11-26 20:08:39.668 -05 [4156] SENTENCIA:  UPDATE animales
+	SET Nombre = "Nerón"
+	WHERE id = 1;
+2024-11-26 20:09:12.993 -05 [4156] ERROR:  no existe la columna «Nerón» en carácter 30
+2024-11-26 20:09:12.993 -05 [4156] SENTENCIA:  UPDATE ANIMALES
+	SET Nombre = "Nerón"
+	WHERE id = 1;
+2024-11-26 20:09:59.168 -05 [5956] LOG:  empezando checkpoint: time
+2024-11-26 20:10:02.020 -05 [5956] LOG:  checkpoint completo: escritos 27 b�fers (0.2%); 0 archivos WAL a�adidos, 0 eliminados, 0 reciclados; write=2.802 s, sync=0.034 s, total=2.852 s; archivos sincronizados=21, m�s largo=0.016 s, promedio=0.002 s; distancia=78 kB, estimaci�n=1058 kB; lsn=0/5B2C550, lsn de redo=0/5B2C4F8
+2024-11-26 20:19:59.040 -05 [5956] LOG:  empezando checkpoint: time
+2024-11-26 20:20:00.619 -05 [5956] LOG:  checkpoint completo: escritos 15 b�fers (0.1%); 0 archivos WAL a�adidos, 0 eliminados, 0 reciclados; write=1.535 s, sync=0.019 s, total=1.580 s; archivos sincronizados=13, m�s largo=0.009 s, promedio=0.002 s; distancia=63 kB, estimaci�n=959 kB; lsn=0/5B3C300, lsn de redo=0/5B3C2A8
+2024-11-26 20:24:59.919 -05 [4156] ERROR:  error de sintaxis en o cerca de «(» en carácter 13
+2024-11-26 20:24:59.919 -05 [4156] SENTENCIA:  INSERT INTO (idhabitat,idvisitantes,fechavisita) VALUES 
+	(4,251,'2024-11-26'),
+	(10,681,'2024-11-26'),
+	(14,285,'2024-11-26'),
+	(1,887,'2024-11-26'),
+	(2,664,'2024-11-26'),
+	(11,601,'2024-11-26'),
+	(8,647,'2024-11-26'),
+	(9,497,'2024-11-26'),
+	(3,630,'2024-11-26'),
+	(2,665,'2024-11-26'),
+	(12,577,'2024-11-26');
+2024-11-26 20:29:59.643 -05 [5956] LOG:  empezando checkpoint: time
+2024-11-26 20:30:01.110 -05 [5956] LOG:  checkpoint completo: escritos 14 b�fers (0.1%); 0 archivos WAL a�adidos, 0 eliminados, 0 reciclados; write=1.428 s, sync=0.015 s, total=1.468 s; archivos sincronizados=8, m�s largo=0.009 s, promedio=0.002 s; distancia=79 kB, estimaci�n=871 kB; lsn=0/5B4FF80, lsn de redo=0/5B4FF28
+2024-11-26 20:35:24.780 -05 [3612] LOG:  no se pudo recibir datos del cliente: An existing connection was forcibly closed by the remote host.
+	
+2024-11-26 20:35:24.782 -05 [3764] LOG:  no se pudo recibir datos del cliente: An existing connection was forcibly closed by the remote host.
+	
+2024-11-26 20:35:24.780 -05 [16504] LOG:  no se pudo recibir datos del cliente: An existing connection was forcibly closed by the remote host.
+	

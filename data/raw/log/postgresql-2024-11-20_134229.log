@@ -1,0 +1,286 @@
+2024-11-20 13:42:29.765 -05 [5660] LOG:  el sistema de bases de datos fue apagado en 2024-11-20 13:42:01 -05
+2024-11-20 13:47:29.782 -05 [5956] LOG:  empezando checkpoint: time
+2024-11-20 13:47:29.818 -05 [5956] LOG:  checkpoint completo: escritos 3 b�fers (0.0%); 0 archivos WAL a�adidos, 0 eliminados, 0 reciclados; write=0.010 s, sync=0.005 s, total=0.061 s; archivos sincronizados=2, m�s largo=0.003 s, promedio=0.003 s; distancia=0 kB, estimaci�n=0 kB; lsn=0/58FC618, lsn de redo=0/58FC5C0
+2024-11-20 14:12:29.857 -05 [5956] LOG:  empezando checkpoint: time
+2024-11-20 14:12:31.865 -05 [5956] LOG:  checkpoint completo: escritos 18 b�fers (0.1%); 0 archivos WAL a�adidos, 0 eliminados, 0 reciclados; write=1.970 s, sync=0.010 s, total=2.009 s; archivos sincronizados=5, m�s largo=0.005 s, promedio=0.002 s; distancia=43 kB, estimaci�n=43 kB; lsn=0/5907338, lsn de redo=0/59072E0
+2024-11-20 14:17:41.284 -05 [12444] ERROR:  error de sintaxis en o cerca de «%» en carácter 39
+2024-11-20 14:17:41.284 -05 [12444] SENTENCIA:  SELECT *
+	FROM AVION
+	WHERE Modelo Like %A;
+2024-11-20 15:28:49.175 -05 [5956] LOG:  empezando checkpoint: time
+2024-11-20 15:29:03.353 -05 [5956] LOG:  checkpoint completo: escritos 129 b�fers (0.8%); 0 archivos WAL a�adidos, 0 eliminados, 0 reciclados; write=14.124 s, sync=0.038 s, total=14.182 s; archivos sincronizados=16, m�s largo=0.017 s, promedio=0.003 s; distancia=1722 kB, estimaci�n=1722 kB; lsn=0/5AB5C20, lsn de redo=0/5AB5B90
+2024-11-20 15:33:06.638 -05 [12444] ERROR:  error de sintaxis en o cerca de «UNION» en carácter 230
+2024-11-20 15:33:06.638 -05 [12444] SENTENCIA:  SELECT 
+	    n.Nombre AS Nacionalidad,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.NACIONALIDAD n
+	JOIN sta.PASAJERO p ON n.ID = p.IDNacionalidad
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	GROUP BY n.ID
+	ORDER BY TotalVuelos DESC
+	LIMIT 5
+	UNION ALL
+	-- Nacionalidades con menos vuelos
+	SELECT 
+	    n.Nombre AS Nacionalidad,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.NACIONALIDAD n
+	JOIN sta.PASAJERO p ON n.ID = p.IDNacionalidad
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	GROUP BY n.ID
+	ORDER BY TotalVuelos ASC
+	LIMIT 5;
+2024-11-20 15:33:26.140 -05 [12444] ERROR:  error de sintaxis en o cerca de «UNION» en carácter 231
+2024-11-20 15:33:26.140 -05 [12444] SENTENCIA:  SELECT 
+	    n.Nombre AS Nacionalidad,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.NACIONALIDAD n
+	JOIN sta.PASAJERO p ON n.ID = p.IDNacionalidad
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	GROUP BY n.ID
+	ORDER BY TotalVuelos DESC
+	LIMIT 5;
+	UNION ALL
+	-- Nacionalidades con menos vuelos
+	SELECT 
+	    n.Nombre AS Nacionalidad,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.NACIONALIDAD n
+	JOIN sta.PASAJERO p ON n.ID = p.IDNacionalidad
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	GROUP BY n.ID
+	ORDER BY TotalVuelos ASC
+	LIMIT 5;
+2024-11-20 15:34:31.207 -05 [12444] ERROR:  error de sintaxis en o cerca de «UNION» en carácter 230
+2024-11-20 15:34:31.207 -05 [12444] SENTENCIA:  SELECT 
+	    n.Nombre AS Nacionalidad,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.NACIONALIDAD n
+	JOIN sta.PASAJERO p ON n.ID = p.IDNacionalidad
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	GROUP BY n.ID
+	ORDER BY TotalVuelos DESC
+	LIMIT 5
+	UNION ALLSELECT 
+	    n.Nombre AS Nacionalidad,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.NACIONALIDAD n
+	JOIN sta.PASAJERO p ON n.ID = p.IDNacionalidad
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	GROUP BY n.ID
+	ORDER BY TotalVuelos DESC
+	LIMIT 5;
+2024-11-20 15:35:34.901 -05 [16728] ERROR:  error de sintaxis en o cerca de «UNION» en carácter 230
+2024-11-20 15:35:34.901 -05 [16728] SENTENCIA:  SELECT 
+	    n.Nombre AS Nacionalidad,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.NACIONALIDAD n
+	JOIN sta.PASAJERO p ON n.ID = p.IDNacionalidad
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	GROUP BY n.ID
+	ORDER BY TotalVuelos DESC
+	LIMIT 5
+	UNION ALL
+	-- Nacionalidades con menos vuelos
+	SELECT 
+	    n.Nombre AS Nacionalidad,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.NACIONALIDAD n
+	JOIN sta.PASAJERO p ON n.ID = p.IDNacionalidad
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	GROUP BY n.ID
+	ORDER BY TotalVuelos ASC
+	LIMIT 5;
+2024-11-20 15:35:42.019 -05 [16728] ERROR:  error de sintaxis en o cerca de «UNION» en carácter 230
+2024-11-20 15:35:42.019 -05 [16728] SENTENCIA:  SELECT 
+	    n.Nombre AS Nacionalidad,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.NACIONALIDAD n
+	JOIN sta.PASAJERO p ON n.ID = p.IDNacionalidad
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	GROUP BY n.ID
+	ORDER BY TotalVuelos DESC
+	LIMIT 5
+	UNION
+	-- Nacionalidades con menos vuelos
+	SELECT 
+	    n.Nombre AS Nacionalidad,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.NACIONALIDAD n
+	JOIN sta.PASAJERO p ON n.ID = p.IDNacionalidad
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	GROUP BY n.ID
+	ORDER BY TotalVuelos ASC
+	LIMIT 5;
+2024-11-20 15:36:35.061 -05 [16728] ERROR:  error de sintaxis en o cerca de «UNION» en carácter 246
+2024-11-20 15:36:35.061 -05 [16728] SENTENCIA:  SELECT * FROM
+	( SELECT 
+	    n.Nombre AS Nacionalidad,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.NACIONALIDAD n
+	JOIN sta.PASAJERO p ON n.ID = p.IDNacionalidad
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	GROUP BY n.ID
+	ORDER BY TotalVuelos DESC
+	LIMIT 5
+	UNION) AS Q1,
+	(SELECT 
+	    n.Nombre AS Nacionalidad,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.NACIONALIDAD n
+	JOIN sta.PASAJERO p ON n.ID = p.IDNacionalidad
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	GROUP BY n.ID
+	ORDER BY TotalVuelos ASC
+	LIMIT 5) AS Q2;
+2024-11-20 15:38:49.366 -05 [5956] LOG:  empezando checkpoint: time
+2024-11-20 15:38:49.958 -05 [5956] LOG:  checkpoint completo: escritos 5 b�fers (0.0%); 0 archivos WAL a�adidos, 0 eliminados, 0 reciclados; write=0.556 s, sync=0.003 s, total=0.593 s; archivos sincronizados=2, m�s largo=0.002 s, promedio=0.002 s; distancia=0 kB, estimaci�n=1550 kB; lsn=0/5AB5E00, lsn de redo=0/5AB5D70
+2024-11-20 15:40:28.125 -05 [16728] ERROR:  error de sintaxis en o cerca de «SELECT» en carácter 432
+2024-11-20 15:40:28.125 -05 [16728] SENTENCIA:  SELECT 
+	    p.Nombre AS Pasajero,
+	    p.Apellido,
+	    ar.Nombre AS Aerolinea
+	FROM sta.PASAJERO p
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	JOIN sta.VUELO v ON t.IDVuelo = v.ID
+	JOIN sta.AVION a ON v.IDAvion = a.ID
+	JOIN sta.AEROLINEA ar ON a.IDAerolinea = ar.ID
+	ORDER BY p.Nombre, p.Apellido, ar.Nombre;
+	
+	SELECT 
+	    a.Modelo AS ModeloAvion,
+	    COUNT(a.ID) AS TotalFlota
+	FROM sta.AVION a
+	GROUP BY a.Modelo
+	ORDER BY TotalFlota DESC
+	
+	
+	SELECT 
+	    p.Nombre AS Pasajero,
+	    p.Apellido,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.PASAJERO p
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	JOIN sta.VUELO v ON t.IDVuelo = v.ID
+	WHERE v.Fecha BETWEEN '2022-01-01' AND '2024-03-31'
+	GROUP BY p.ID
+	ORDER BY TotalVuelos DESC
+	LIMIT 1;
+	--LIMIT 1;
+2024-11-21 22:29:14.619 -05 [15956] ERROR:  error de sintaxis en o cerca de «SELECT» en carácter 432
+2024-11-21 22:29:14.619 -05 [15956] SENTENCIA:  SELECT 
+	    p.Nombre AS Pasajero,
+	    p.Apellido,
+	    ar.Nombre AS Aerolinea
+	FROM sta.PASAJERO p
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	JOIN sta.VUELO v ON t.IDVuelo = v.ID
+	JOIN sta.AVION a ON v.IDAvion = a.ID
+	JOIN sta.AEROLINEA ar ON a.IDAerolinea = ar.ID
+	ORDER BY p.Nombre, p.Apellido, ar.Nombre;
+	
+	SELECT 
+	    a.Modelo AS ModeloAvion,
+	    COUNT(a.ID) AS TotalFlota
+	FROM sta.AVION a
+	GROUP BY a.Modelo
+	ORDER BY TotalFlota DESC
+	
+	
+	SELECT 
+	    p.Nombre AS Pasajero,
+	    p.Apellido,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.PASAJERO p
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	JOIN sta.VUELO v ON t.IDVuelo = v.ID
+	WHERE v.Fecha BETWEEN '2022-01-01' AND '2024-03-31'
+	GROUP BY p.ID
+	ORDER BY TotalVuelos DESC
+	LIMIT 1;
+	--LIMIT 1;
+	
+	
+	select CodPaisOrigen, Coalesce(valorTotalRecaudado,0) from sta.vuelo where valorTotalRecaudado IS NULL;
+2024-11-21 22:29:16.621 -05 [15956] ERROR:  error de sintaxis en o cerca de «SELECT» en carácter 432
+2024-11-21 22:29:16.621 -05 [15956] SENTENCIA:  SELECT 
+	    p.Nombre AS Pasajero,
+	    p.Apellido,
+	    ar.Nombre AS Aerolinea
+	FROM sta.PASAJERO p
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	JOIN sta.VUELO v ON t.IDVuelo = v.ID
+	JOIN sta.AVION a ON v.IDAvion = a.ID
+	JOIN sta.AEROLINEA ar ON a.IDAerolinea = ar.ID
+	ORDER BY p.Nombre, p.Apellido, ar.Nombre;
+	
+	SELECT 
+	    a.Modelo AS ModeloAvion,
+	    COUNT(a.ID) AS TotalFlota
+	FROM sta.AVION a
+	GROUP BY a.Modelo
+	ORDER BY TotalFlota DESC
+	
+	
+	SELECT 
+	    p.Nombre AS Pasajero,
+	    p.Apellido,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.PASAJERO p
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	JOIN sta.VUELO v ON t.IDVuelo = v.ID
+	WHERE v.Fecha BETWEEN '2022-01-01' AND '2024-03-31'
+	GROUP BY p.ID
+	ORDER BY TotalVuelos DESC
+	LIMIT 1;
+	--LIMIT 1;
+	
+	
+	select CodPaisOrigen, Coalesce(valorTotalRecaudado,0) from sta.vuelo where valorTotalRecaudado IS NULL;
+2024-11-21 22:29:52.537 -05 [15956] ERROR:  error de sintaxis en o cerca de «UNION» en carácter 230
+2024-11-21 22:29:52.537 -05 [15956] SENTENCIA:  SELECT 
+	    n.Nombre AS Nacionalidad,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.NACIONALIDAD n
+	JOIN sta.PASAJERO p ON n.ID = p.IDNacionalidad
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	GROUP BY n.ID
+	ORDER BY TotalVuelos DESC
+	LIMIT 5
+	UNION ALL
+	-- Nacionalidades con menos vuelos
+	SELECT 
+	    n.Nombre AS Nacionalidad,
+	    COUNT(t.ID) AS TotalVuelos
+	FROM sta.NACIONALIDAD n
+	JOIN sta.PASAJERO p ON n.ID = p.IDNacionalidad
+	JOIN sta.TICKET t ON p.ID = t.IDPasajero
+	GROUP BY n.ID
+	ORDER BY TotalVuelos ASC
+	LIMIT 5;
+2024-11-21 22:33:13.070 -05 [15956] ERROR:  no existe la relación «vuelo» en carácter 80
+2024-11-21 22:33:13.070 -05 [15956] SENTENCIA:  SELECT COUNT(vu) AS numero_de_vuelos,
+		 pa.idnacionalidad AS nacionalidad
+	FROM vuelo AS vu 
+	INNER JOIN pasajero AS pa ON vu.id = pa.idnacionalidad
+	GROUP BY pa.idnacionalidad
+	ORDER BY numero_de_vuelos DESC
+	LIMIT 5;
+2024-11-21 22:33:41.417 -05 [15956] ERROR:  no existe la relación «pasajero» en carácter 108
+2024-11-21 22:33:41.417 -05 [15956] SENTENCIA:  SELECT COUNT(vu) AS numero_de_vuelos,
+		 pa.idnacionalidad AS nacionalidad
+	FROM sta.vuelo AS vu 
+	INNER JOIN pasajero AS pa ON vu.id = pa.idnacionalidad
+	GROUP BY pa.idnacionalidad
+	ORDER BY numero_de_vuelos DESC
+	LIMIT 5;
+2024-11-21 22:51:38.657 -05 [15956] LOG:  no se pudo recibir datos del cliente: An existing connection was forcibly closed by the remote host.
+	
+2024-11-21 22:51:38.669 -05 [11756] LOG:  no se pudo recibir datos del cliente: An existing connection was forcibly closed by the remote host.
+	
+2024-11-21 22:51:38.678 -05 [12456] LOG:  no se pudo recibir datos del cliente: An existing connection was forcibly closed by the remote host.
+	
+2024-11-21 22:51:38.724 -05 [19264] LOG:  no se pudo recibir datos del cliente: An existing connection was forcibly closed by the remote host.
+	
+2024-11-21 22:51:38.727 -05 [18884] LOG:  no se pudo recibir datos del cliente: An existing connection was forcibly closed by the remote host.
+	

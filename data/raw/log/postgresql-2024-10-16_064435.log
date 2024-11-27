@@ -1,0 +1,21 @@
+2024-10-16 06:44:35.612 -05 [16852] LOG:  el sistema de bases de datos fue apagado en 2024-10-16 06:44:25 -05
+2024-10-16 06:46:28.173 -05 [12808] ERROR:  error de sintaxis en o cerca de Â«/Â» en carÃ¡cter 1
+2024-10-16 06:46:28.173 -05 [12808] SENTENCIA:  /dl
+	/d
+	select 1 from dual;
+2024-10-16 06:49:35.614 -05 [18336] LOG:  empezando checkpoint: time
+2024-10-16 06:49:40.343 -05 [18336] LOG:  checkpoint completo: escritos 45 búfers (0.3%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=4.684 s, sync=0.020 s, total=4.733 s; archivos sincronizados=11, más largo=0.009 s, promedio=0.002 s; distancia=269 kB, estimación=269 kB; lsn=0/15B1440, lsn de redo=0/15B13B0
+2024-10-16 06:50:02.259 -05 [12808] ERROR:  error de sintaxis en o cerca de Â«clearÂ» en carÃ¡cter 1
+2024-10-16 06:50:02.259 -05 [12808] SENTENCIA:  clear
+	cls
+	CREATE USER alejo_bdi WITH PASSWORD 'bdi2024**';
+2024-10-16 06:54:35.349 -05 [18336] LOG:  empezando checkpoint: time
+2024-10-16 06:54:35.941 -05 [18336] LOG:  checkpoint completo: escritos 5 búfers (0.0%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=0.431 s, sync=0.020 s, total=0.592 s; archivos sincronizados=5, más largo=0.016 s, promedio=0.004 s; distancia=3 kB, estimación=243 kB; lsn=0/15B2380, lsn de redo=0/15B2328
+2024-10-16 08:04:50.124 -05 [13488] LOG:  no se pudo recibir datos del cliente: An existing connection was forcibly closed by the remote host.
+	
+2024-10-16 13:50:19.205 -05 [10944] FATAL:  la autentificación password falló para el usuario «postgres»
+2024-10-16 13:50:19.205 -05 [10944] DETALLE:  La conexión coincidió con el archivo «C:/Program Files/PostgreSQL/17/data/pg_hba.conf» línea 117: «host    all             all             ::1/128                 scram-sha-256»
+2024-10-16 17:30:33.234 -05 [11184] ERROR:  cancelando la sentencia debido a una petición del usuario
+2024-10-16 17:30:33.244 -05 [18336] LOG:  apagando
+2024-10-16 17:30:33.249 -05 [18336] LOG:  empezando checkpoint: shutdown immediate
+2024-10-16 17:30:33.269 -05 [18336] LOG:  checkpoint completo: escritos 0 búfers (0.0%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=0.002 s, sync=0.001 s, total=0.024 s; archivos sincronizados=0, más largo=0.000 s, promedio=0.000 s; distancia=0 kB, estimación=218 kB; lsn=0/15B2430, lsn de redo=0/15B2430
