@@ -1,7 +1,0 @@
-2024-11-27 08:33:49.855 -05 [20160] FATAL:  no existe la base de datos «zologico»
-2024-11-27 08:34:10.925 -05 [6140] ERROR:  permiso denegado a la tabla auditoria_animales
-2024-11-27 08:34:10.925 -05 [6140] SENTENCIA:  LOCK TABLE animals.animales, animals.cuidador, animals.especialidad, animals.especie, animals.familia, animals.estado_conservacion, animals.habitat, animals.ubicacion, animals.clima, animals.tipo_visitantes, animals.visitantes, animals.habitat_visitantes, animals.auditoria_animales IN ACCESS SHARE MODE
-2024-11-27 08:34:10.943 -05 [6140] LOG:  no se pudo recibir datos del cliente: An existing connection was forcibly closed by the remote host.
-	
-2024-11-27 08:43:21.741 -05 [5956] LOG:  empezando checkpoint: force wait
-2024-11-27 08:43:22.335 -05 [5956] LOG:  checkpoint completo: escritos 5 búfers (0.0%); 0 archivos WAL añadidos, 0 eliminados, 1 reciclados; write=0.550 s, sync=0.020 s, total=0.595 s; archivos sincronizados=3, más largo=0.018 s, promedio=0.007 s; distancia=4800 kB, estimación=4800 kB; lsn=0/6000080, lsn de redo=0/6000028

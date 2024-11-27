@@ -1,3 +1,0 @@
-2024-11-07 06:29:18.198 -05 [5740] LOG:  el sistema de bases de datos fue apagado en 2024-11-07 06:28:47 -05
-2024-11-07 06:34:18.195 -05 [5784] LOG:  empezando checkpoint: time
-2024-11-07 06:34:18.220 -05 [5784] LOG:  checkpoint completo: escritos 3 búfers (0.0%); 0 archivos WAL añadidos, 0 eliminados, 0 reciclados; write=0.006 s, sync=0.003 s, total=0.036 s; archivos sincronizados=2, más largo=0.002 s, promedio=0.002 s; distancia=0 kB, estimación=0 kB; lsn=0/444AF18, lsn de redo=0/444AEC0
