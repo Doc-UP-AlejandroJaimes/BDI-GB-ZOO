@@ -8,7 +8,7 @@
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
-SET transaction_timeout = 0;
+--SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -44,7 +44,7 @@ END;
 $$;
 
 
-ALTER FUNCTION animals.calcular_costo_final() OWNER TO postgres;
+ALTER FUNCTION animals.calcular_costo_final() OWNER TO adminzoo;
 
 --
 -- Name: calcular_descuento(numeric, numeric); Type: FUNCTION; Schema: animals; Owner: adminzoo
@@ -143,7 +143,7 @@ END;
 $$;
 
 
-ALTER FUNCTION animals.registrar_cambios_animales() OWNER TO postgres;
+ALTER FUNCTION animals.registrar_cambios_animales() OWNER TO adminzoo;
 
 --
 -- Name: registrar_visita(integer, integer, date); Type: PROCEDURE; Schema: animals; Owner: adminzoo
@@ -307,7 +307,7 @@ CREATE TABLE animals.auditoria_animales (
 );
 
 
-ALTER TABLE animals.auditoria_animales OWNER TO postgres;
+ALTER TABLE animals.auditoria_animales OWNER TO adminzoo;
 
 --
 -- Name: auditoria_animales_id_seq; Type: SEQUENCE; Schema: animals; Owner: postgres
@@ -322,7 +322,7 @@ CREATE SEQUENCE animals.auditoria_animales_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE animals.auditoria_animales_id_seq OWNER TO postgres;
+ALTER SEQUENCE animals.auditoria_animales_id_seq OWNER TO adminzoo;
 
 --
 -- Name: auditoria_animales_id_seq; Type: SEQUENCE OWNED BY; Schema: animals; Owner: postgres
