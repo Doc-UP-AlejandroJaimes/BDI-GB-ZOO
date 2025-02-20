@@ -6,11 +6,6 @@
 **Creado**: 23-Octubre-2024 🗓️  
 **Última Actualización**: 26-Octubre-2024 ✨  
 
-## Descripción
-Bienvenido a **Mi Proyecto Asombroso**! Este repositorio alberga algunos de mis experimentos de código más emocionantes y proyectos personales. Siente la libertad de explorar la carpeta `/src` para ver todo el contenido mágico. ⚡
-
-Las contribuciones y los comentarios siempre son bienvenidos! 🙌
-
 ## Estructura del Proyecto
 
 ### [docs/](./docs/)
